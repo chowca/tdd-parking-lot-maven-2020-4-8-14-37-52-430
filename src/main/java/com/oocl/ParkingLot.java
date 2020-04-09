@@ -17,7 +17,8 @@ public class ParkingLot {
 
     public ParkingTicket park(Car car) {
         boolean isFull = this.parkingTicketCarMap.size() == this.capacity;
-        if (isFull) {
+        boolean isParked = this.parkingTicketCarMap.containsValue(car);
+        if (isFull || isParked) {
             return null;
         } else {
             ParkingTicket parkingTicket = new ParkingTicket();
