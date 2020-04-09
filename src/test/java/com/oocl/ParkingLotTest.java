@@ -39,4 +39,13 @@ public class ParkingLotTest {
 
         Assert.assertNull(fetchedCar);
     }
+
+    @Test
+    public void should_not_return_car_with_used_parking_ticket(){
+        ParkingTicket parkingTicket = parkingLot.park(new Car());
+        parkingLot.fetch(parkingTicket);
+        Car car = parkingLot.fetch(parkingTicket);
+
+        Assert.assertNull(car);
+    }
 }
