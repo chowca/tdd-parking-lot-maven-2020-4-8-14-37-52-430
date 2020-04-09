@@ -48,4 +48,13 @@ public class ParkingLotTest {
 
         Assert.assertNull(car);
     }
+
+    @Test
+    public void should_not_park_car_if_the_park_is_full(){
+        ParkingLot parkingLotWith1Capacity = new ParkingLot(1);
+        parkingLotWith1Capacity.park(new Car());
+        ParkingTicket parkingTicket = parkingLotWith1Capacity.park(new Car());
+
+        Assert.assertNull(parkingTicket);
+    }
 }

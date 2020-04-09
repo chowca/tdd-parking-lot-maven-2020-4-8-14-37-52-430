@@ -4,13 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+    public final static int DEFAULT_CAPACITY = 10;
+    private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
+    private int capacity = DEFAULT_CAPACITY;
 
-    private Map<ParkingTicket,Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
+    public ParkingLot() {
+    }
+
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+    }
 
     public ParkingTicket park(Car car) {
-        ParkingTicket parkingTicket = new ParkingTicket();
-        this.parkingTicketCarMap.put(parkingTicket,car);
-        return parkingTicket;
+        boolean isFull = this.parkingTicketCarMap.size() == this.capacity;
+        if (isFull) {
+            return null;
+        } else {
+            ParkingTicket parkingTicket = new ParkingTicket();
+            this.parkingTicketCarMap.put(parkingTicket, car);
+            return parkingTicket;
+        }
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
