@@ -57,4 +57,10 @@ public class ParkingLotTest {
 
         Assert.assertNull(parkingTicket);
     }
+
+    @Test
+    public void should_not_return_car_with_no_parking_ticket(){
+        Car car = parkingLot.fetch(null);
+        Assert.assertNull(car);
+    }
 }
