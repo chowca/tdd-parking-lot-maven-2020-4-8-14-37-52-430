@@ -2,8 +2,8 @@ package com.oocl;
 
 import java.util.Comparator;
 
-public class SmartParkingBoy extends ParkingBoy {
-    public SmartParkingBoy(ParkingLot... ParkingLots) {
+public class SuperSmartParkingBoy extends SmartParkingBoy {
+    public SuperSmartParkingBoy(ParkingLot... ParkingLots) {
         super(ParkingLots);
     }
 
@@ -12,7 +12,8 @@ public class SmartParkingBoy extends ParkingBoy {
         return this.getParkingLots()
                 .stream()
                 .filter(parkingLot -> !parkingLot.isFull())
-                .max(Comparator.comparingInt(ParkingLot::getCapacity))
+                .sorted(Comparator.comparing(ParkingLot::getCapacity).reversed())
+                .max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate))
                 .orElse(null);
     }
 }

@@ -1,13 +1,10 @@
 package com.oocl;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class SmartParkingBoyTest {
     private SmartParkingBoy smartParkingBoy;
-    private Car car;
     private ParkingTicket parkingTicket;
 
     @Test

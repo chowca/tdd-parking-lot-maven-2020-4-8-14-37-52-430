@@ -6,7 +6,7 @@ import java.util.Map;
 public class ParkingLot {
     private int capacity = Config.DEFAULT_CAPACITY;
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
-    
+
 
     public ParkingLot() {
     }
@@ -33,7 +33,7 @@ public class ParkingLot {
         return this.parkingTicketCarMap.containsValue(car);
     }
 
-    public boolean isTicketFound(ParkingTicket parkingTicket){
+    public boolean isTicketFound(ParkingTicket parkingTicket) {
         return this.parkingTicketCarMap.containsKey(parkingTicket);
     }
 
@@ -44,5 +44,9 @@ public class ParkingLot {
     public Car fetch(ParkingTicket parkingTicket) {
         Car fetchedCar = this.parkingTicketCarMap.remove(parkingTicket);
         return fetchedCar;
+    }
+
+    public double getAvailablePositionRate() {
+        return ((double)capacity - (double)parkingTicketCarMap.size()) / (double)capacity;
     }
 }
