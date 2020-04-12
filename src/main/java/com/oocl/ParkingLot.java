@@ -19,13 +19,13 @@ public class ParkingLot {
         if (isFull() || isParked(car)) {
             return null;
         } else {
-            ParkingTicket parkingTicket = new ParkingTicket();
+            ParkingTicket parkingTicket = new ParkingTicket(this);
             this.parkingTicketCarMap.put(parkingTicket, car);
             return parkingTicket;
         }
     }
 
-    private boolean isParked(Car car) {
+    public boolean isParked(Car car) {
         return this.parkingTicketCarMap.containsValue(car);
     }
 

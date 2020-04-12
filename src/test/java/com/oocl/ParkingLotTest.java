@@ -35,7 +35,7 @@ public class ParkingLotTest {
     public void should_not_return_car_when_parking_boy_fetch_car_with_incorrect_parking_ticket(){
         Car car = new Car();
         parkingLot.park(car);
-        Car fetchedCar = parkingLot.fetch(new ParkingTicket());
+        Car fetchedCar = parkingLot.fetch(new ParkingTicket(parkingLot));
 
         Assert.assertNull(fetchedCar);
     }

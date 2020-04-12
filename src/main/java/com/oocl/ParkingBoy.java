@@ -1,27 +1,36 @@
 package com.oocl;
 
-public class ParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private List<ParkingLot> parkingLots = new ArrayList<>();
+    private ParkingLot selectedParkingLot;
+
+
+    public ParkingBoy(ParkingLot... parkingLots) {
+        this.parkingLots.addAll(Arrays.asList(parkingLots));
+        this.selectedParkingLot = this.parkingLots.stream().findFirst().orElse(null);
+
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.NO_PARKING_TICKET);
-        } else if ((parkingTicket != null) && (this.parkingLot.fetch(parkingTicket) == null)) {
+        } else if ((parkingTicket != null) && (this.selectedParkingLot.fetch(parkingTicket) == null)) {
             throw new IllegalArgumentException(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
         } else {
-            return this.parkingLot.fetch(parkingTicket);
+            return this.selectedParkingLot.fetch(parkingTicket);
         }
     }
 
     public ParkingTicket park(Car car) {
-        if (this.parkingLot.isFull()) {
+        this.selectedParkingLot = this.parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
+        if (this.selectedParkingLot == null) {
             throw new IllegalArgumentException(ErrorMsg.NOT_ENOUGH_POSITION);
         } else {
-            return this.parkingLot.park(car);
+            return this.selectedParkingLot.park(car);
         }
     }
 }
