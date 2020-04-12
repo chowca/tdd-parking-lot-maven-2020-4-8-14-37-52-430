@@ -19,9 +19,21 @@ public class ParkingBoyTest {
         parkingBoy = new ParkingBoy(new ParkingLot());
     }
     @Test
-    public void should_not_return_car_but_error_when_no_wrong_ticket_provided(){
+    public void should_not_return_car_but_error_when_no_ticket_provided(){
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(ErrorMsg.NO_PARKING_TICKET);
         car = parkingBoy.fetch(parkingTicket);
+        assertNull(car);
+    }
+
+    @Test
+    public void should_not_return_car_but_error_when_used_ticket_provided(){
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
+        parkingTicket = parkingBoy.park(new Car());
+        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+        car = parkingBoy.fetch(parkingTicket);
+        assertNotEquals(fetchedCar,car);
+        assertNull(car);
     }
 }
