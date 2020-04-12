@@ -29,7 +29,7 @@ public class ParkingLot {
         return this.parkingTicketCarMap.containsValue(car);
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return this.parkingTicketCarMap.size() == this.capacity;
     }
 

@@ -36,4 +36,14 @@ public class ParkingBoyTest {
         assertNotEquals(fetchedCar,car);
         assertNull(car);
     }
+
+    @Test
+    public void should_not_return_parking_ticket_but_error_when_fetching_car_into_full_parking_lot(){
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.NOT_ENOUGH_POSITION);
+        parkingBoy = new ParkingBoy(new ParkingLot(1));
+        parkingBoy.park(new Car());
+        parkingTicket = parkingBoy.park(new Car());
+        assertNull(parkingTicket);
+    }
 }

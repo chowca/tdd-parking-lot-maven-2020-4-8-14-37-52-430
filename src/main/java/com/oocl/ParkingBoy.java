@@ -10,7 +10,7 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.NO_PARKING_TICKET);
-        } else if ((parkingTicket != null) && (this.parkingLot.fetch(parkingTicket) == null)){
+        } else if ((parkingTicket != null) && (this.parkingLot.fetch(parkingTicket) == null)) {
             throw new IllegalArgumentException(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
         } else {
             return this.parkingLot.fetch(parkingTicket);
@@ -18,6 +18,10 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        return this.parkingLot.park(car);
+        if (this.parkingLot.isFull()) {
+            throw new IllegalArgumentException(ErrorMsg.NOT_ENOUGH_POSITION);
+        } else {
+            return this.parkingLot.park(car);
+        }
     }
 }
