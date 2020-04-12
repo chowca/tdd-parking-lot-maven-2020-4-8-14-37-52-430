@@ -15,6 +15,10 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public ParkingTicket park(Car car) {
         if (isFull() || isCarFound(car)) {
             return null;

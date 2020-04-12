@@ -18,7 +18,7 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.NO_PARKING_TICKET);
-        }else{
+        } else {
             this.selectedParkingLot = parkingTicket.getParkingLot();
         }
         if ((parkingTicket != null) && (!this.selectedParkingLot.isTicketFound(parkingTicket))) {
@@ -29,11 +29,19 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        this.selectedParkingLot = this.parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
+        this.selectedParkingLot = getSelectedParkingLot();
         if (this.selectedParkingLot == null) {
             throw new IllegalArgumentException(ErrorMsg.NOT_ENOUGH_POSITION);
         } else {
             return this.selectedParkingLot.park(car);
         }
+    }
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
+    public ParkingLot getSelectedParkingLot() {
+        return this.parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
     }
 }
