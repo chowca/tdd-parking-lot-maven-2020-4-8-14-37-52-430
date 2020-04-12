@@ -18,7 +18,10 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
             throw new IllegalArgumentException(ErrorMsg.NO_PARKING_TICKET);
-        } else if ((parkingTicket != null) && (this.selectedParkingLot.fetch(parkingTicket) == null)) {
+        }else{
+            this.selectedParkingLot = parkingTicket.getParkingLot();
+        }
+        if ((parkingTicket != null) && (!this.selectedParkingLot.isTicketFound(parkingTicket))) {
             throw new IllegalArgumentException(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
         } else {
             return this.selectedParkingLot.fetch(parkingTicket);

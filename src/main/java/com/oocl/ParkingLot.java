@@ -16,7 +16,7 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car) {
-        if (isFull() || isParked(car)) {
+        if (isFull() || isCarFound(car)) {
             return null;
         } else {
             ParkingTicket parkingTicket = new ParkingTicket(this);
@@ -25,8 +25,12 @@ public class ParkingLot {
         }
     }
 
-    public boolean isParked(Car car) {
+    public boolean isCarFound(Car car) {
         return this.parkingTicketCarMap.containsValue(car);
+    }
+
+    public boolean isTicketFound(ParkingTicket parkingTicket){
+        return this.parkingTicketCarMap.containsKey(parkingTicket);
     }
 
     public boolean isFull() {

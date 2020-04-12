@@ -61,4 +61,18 @@ public class ParkingBoyTest {
         assertTrue(!secondParkingLot.isFull());
         assertEquals(car, fetchedCar);
     }
+
+    @Test
+    public void should_return_car_from_2nd_parking_lot_when_the_1st_parking_lot_is_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot();
+        parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        car = new Car();
+        parkingBoy.park(new Car());
+        parkingTicket = parkingBoy.park(car);
+        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+        assertTrue(firstParkingLot.isFull());
+        assertTrue(!secondParkingLot.isFull());
+        assertEquals(car, fetchedCar);
+    }
 }
