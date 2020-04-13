@@ -91,4 +91,15 @@ public class ServiceManagerTest {
         Car fetchedCar = serviceManager.fetchByParkingTicket(null);
         assertNull(fetchedCar);
     }
+
+    @Test
+    public void should_not_return_car_but_error_when_used_parking_ticket_provided() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
+        ParkingTicket parkingTicket = serviceManager.parkByParkingBoy(new Car());
+        Car fetchedCar = serviceManager.fetchByParkingTicket(parkingTicket);
+        Car car = serviceManager.fetchByParkingTicket(parkingTicket);
+        assertNotEquals(fetchedCar, car);
+        assertNull(car);
+    }
 }
