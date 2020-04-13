@@ -102,4 +102,30 @@ public class ServiceManagerTest {
         assertNotEquals(fetchedCar, car);
         assertNull(car);
     }
+
+    @Test
+    public void should_add_a_new_parking_lot_in_management_list(){
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot3 = new ParkingLot();
+        ServiceManager serviceManager1 = new ServiceManager(parkingLot1,parkingLot2);
+        serviceManager1.addParkingLot(parkingLot3);
+        List<ParkingLot> parkingLots = serviceManager1.getParkingLots();
+        assertEquals(parkingLots.get(0), parkingLot1);
+        assertEquals(parkingLots.get(1), parkingLot2);
+        assertEquals(parkingLots.get(2), parkingLot3);
+        assertEquals(parkingLots.size(),3);
+    }
+
+    @Test
+    public void should_remove_parking_lot_in_management_list(){
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot3 = new ParkingLot();
+        ServiceManager serviceManager1 = new ServiceManager(parkingLot1,parkingLot2, parkingLot3);
+        serviceManager1.removeParkingLot(parkingLot1, parkingLot2);
+        List<ParkingLot> parkingLots = serviceManager1.getParkingLots();
+        assertEquals(parkingLots.get(0), parkingLot3);
+        assertEquals(parkingLots.size(),1);
+    }
 }

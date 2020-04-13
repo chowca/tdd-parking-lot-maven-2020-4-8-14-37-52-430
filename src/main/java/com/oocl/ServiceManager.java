@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ServiceManager {
+public class ServiceManager extends ParkingBoy{
     private List<ParkingBoy> parkingBoys = new ArrayList<>();
     private ParkingBoy selectedParkingBoy;
+
+    public ServiceManager(ParkingLot ...parkingLots) {
+        super(parkingLots);
+    }
 
     public void assignParkingBoyInList(ParkingBoy... parkingBoys) {
         this.parkingBoys.addAll(Arrays.asList(parkingBoys));

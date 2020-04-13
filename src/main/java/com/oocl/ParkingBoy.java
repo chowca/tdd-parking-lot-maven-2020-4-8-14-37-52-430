@@ -41,6 +41,14 @@ public class ParkingBoy {
         return parkingLots;
     }
 
+    protected void addParkingLot(ParkingLot... parkingLots) {
+        this.parkingLots.addAll(Arrays.asList(parkingLots));
+    }
+
+    protected void removeParkingLot(ParkingLot... parkingLots) {
+        this.parkingLots.removeAll(Arrays.asList(parkingLots));
+    }
+
     public ParkingLot getSelectedParkingLot() {
         return this.parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
     }
