@@ -48,4 +48,25 @@ public class ServiceManagerTest {
         assertEquals(cars.get(4), superSmartParkingBoy.fetch(parkingTickets.get(4)));
         assertEquals(cars.get(5), superSmartParkingBoy.fetch(parkingTickets.get(5)));
     }
+
+    @Test
+    public void should_fetch_cars_with_parking_tickets_from_any_parking_boy_in_list() {
+        List<Car> cars = new ArrayList<>();
+        List<Car> fetchedCars = new ArrayList<>();
+        List<ParkingTicket> parkingTickets = new ArrayList<>();
+        serviceManager.assignParkingBoyInList(parkingBoy, smartParkingBoy, superSmartParkingBoy);
+        for (int index = 0; index < 6; index++) {
+            cars.add(new Car());
+        }
+        for (int index = 0; index < cars.size(); index++) {
+            parkingTickets.add(index, serviceManager.parkByParkingBoy(cars.get(index)));
+            fetchedCars.add(index, serviceManager.fetchByParkingTicket(parkingTickets.get(index)));
+        }
+        assertEquals(cars.get(0),fetchedCars.get(0));
+        assertEquals(cars.get(1),fetchedCars.get(1));
+        assertEquals(cars.get(2),fetchedCars.get(2));
+        assertEquals(cars.get(3),fetchedCars.get(3));
+        assertEquals(cars.get(4),fetchedCars.get(4));
+        assertEquals(cars.get(5),fetchedCars.get(5));
+    }
 }
