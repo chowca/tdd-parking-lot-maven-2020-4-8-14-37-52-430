@@ -83,4 +83,12 @@ public class ServiceManagerTest {
         ParkingTicket parkingTicket = serviceManager.parkByParkingBoy(new Car());
         assertNull(parkingTicket);
     }
+
+    @Test
+    public void should_not_return_car_but_error_when_no_parking_ticket_provided() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.NO_PARKING_TICKET);
+        Car fetchedCar = serviceManager.fetchByParkingTicket(null);
+        assertNull(fetchedCar);
+    }
 }
