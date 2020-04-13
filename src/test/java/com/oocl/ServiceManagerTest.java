@@ -128,4 +128,17 @@ public class ServiceManagerTest {
         assertEquals(parkingLots.get(0), parkingLot3);
         assertEquals(parkingLots.size(),1);
     }
+
+    @Test
+    public void should_park_and_fetch_car_in_own_parking_lot(){
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        serviceManager.addParkingLot(parkingLot1, parkingLot2);
+        Car focusedCar = new Car();
+        ParkingTicket parkingTicket = serviceManager.park(focusedCar);
+        assertNull(serviceManager.fetchByParkingTicket(parkingTicket));
+        assertEquals(focusedCar, serviceManager.fetch(parkingTicket));
+    }
 }
