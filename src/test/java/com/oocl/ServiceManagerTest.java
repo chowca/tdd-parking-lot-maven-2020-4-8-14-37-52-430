@@ -1,5 +1,7 @@
 package com.oocl;
 
+import com.constant.ErrorMsg;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

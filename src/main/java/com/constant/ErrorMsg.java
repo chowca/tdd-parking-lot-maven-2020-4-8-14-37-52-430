@@ -1,4 +1,4 @@
-package com.oocl;
+package com.constant;
 
 public class ErrorMsg {
     public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket";
