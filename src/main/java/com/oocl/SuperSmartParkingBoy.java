@@ -2,7 +2,7 @@ package com.oocl;
 
 import java.util.Comparator;
 
-public class SuperSmartParkingBoy extends SmartParkingBoy {
+public class SuperSmartParkingBoy extends ParkingBoy {
     public SuperSmartParkingBoy(ParkingLot... ParkingLots) {
         super(ParkingLots);
     }

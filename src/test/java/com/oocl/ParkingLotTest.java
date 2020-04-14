@@ -14,7 +14,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_parking_ticket_when_parking_boy_park_car() {
+    public void should_return_parking_ticket_when_parking_lot_park_car() {
         Car car = new Car();
 
         ParkingTicket parkingTicket = parkingLot.park(car);

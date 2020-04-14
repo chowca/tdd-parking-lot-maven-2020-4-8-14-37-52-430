@@ -7,7 +7,6 @@ public class ParkingLot {
     private int capacity = Config.DEFAULT_CAPACITY;
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
 
-
     public ParkingLot() {
     }
 

@@ -37,7 +37,7 @@ public class ParkingBoy {
         }
     }
 
-    public List<ParkingLot> getParkingLots() {
+    protected List<ParkingLot> getParkingLots() {
         return parkingLots;
     }
 
