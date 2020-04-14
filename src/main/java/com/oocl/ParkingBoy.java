@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParkingBoy {
+public class ParkingBoy implements StandardParkingBoy{
     private List<ParkingLot> parkingLots = new ArrayList<>();
     private ParkingLot selectedParkingLot;
 
@@ -39,16 +39,10 @@ public class ParkingBoy {
         }
     }
 
-    protected List<ParkingLot> getParkingLots() {
-        return parkingLots;
-    }
-
-    protected void addParkingLot(ParkingLot... parkingLots) {
-        this.parkingLots.addAll(Arrays.asList(parkingLots));
-    }
-
-    protected void removeParkingLot(ParkingLot... parkingLots) {
-        this.parkingLots.removeAll(Arrays.asList(parkingLots));
+    public List<ParkingLot> getParkingLots() {
+        List<ParkingLot> returnParkingLots = new ArrayList<>();
+        returnParkingLots = parkingLots;
+        return returnParkingLots;
     }
 
     public ParkingLot getSelectedParkingLot() {

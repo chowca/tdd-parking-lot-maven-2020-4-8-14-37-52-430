@@ -6,12 +6,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ServiceManager extends ParkingBoy {
+public class ServiceManager implements StandardParkingBoy {
     private List<ParkingBoy> parkingBoys = new ArrayList<>();
+    private List<ParkingLot> parkingLots = new ArrayList<>();
     private ParkingBoy selectedParkingBoy;
+    private ParkingLot selectedParkingLot;
 
     public ServiceManager(ParkingLot... parkingLots) {
-        super(parkingLots);
+        this.parkingLots.addAll(Arrays.asList(parkingLots));
+        this.selectedParkingLot = this.parkingLots.stream().findFirst().orElse(null);
+    }
+
+    public List<ParkingLot> getParkingLots() {
+        List<ParkingLot> returnParkingLots = new ArrayList<>();
+        returnParkingLots = parkingLots;
+        return returnParkingLots;
     }
 
     public void assignParkingBoyInList(ParkingBoy... parkingBoys) {
@@ -53,5 +62,39 @@ public class ServiceManager extends ParkingBoy {
         } else {
             return selectedParkingBoy.fetch(parkingTicket);
         }
+    }
+
+    public void addParkingLot(ParkingLot... parkingLots) {
+        this.parkingLots.addAll(Arrays.asList(parkingLots));
+    }
+
+    public void removeParkingLot(ParkingLot... parkingLots) {
+        this.parkingLots.removeAll(Arrays.asList(parkingLots));
+    }
+
+    public Car fetch(ParkingTicket parkingTicket) {
+        if (parkingTicket == null) {
+            throw new IllegalArgumentException(ErrorMsg.NO_PARKING_TICKET);
+        } else {
+            this.selectedParkingLot = parkingTicket.getParkingLot();
+        }
+        if ((parkingTicket != null) && (!this.selectedParkingLot.isTicketFound(parkingTicket))) {
+            throw new IllegalArgumentException(ErrorMsg.UNRECOGNIZED_PARKING_TICKET);
+        } else {
+            return this.selectedParkingLot.fetch(parkingTicket);
+        }
+    }
+
+    public ParkingTicket park(Car car) {
+        this.selectedParkingLot = getSelectedParkingLot();
+        if (this.selectedParkingLot == null) {
+            throw new IllegalArgumentException(ErrorMsg.NOT_ENOUGH_POSITION);
+        } else {
+            return this.selectedParkingLot.park(car);
+        }
+    }
+
+    public ParkingLot getSelectedParkingLot() {
+        return this.parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
     }
 }
